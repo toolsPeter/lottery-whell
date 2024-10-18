@@ -19,6 +19,16 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        binding.wheelview.viewTreeObserver.addOnGlobalLayoutListener {
+            val width = binding.wheelview.width
+            binding.wheelview.layoutParams.height = width
+            binding.wheelview.requestLayout() // 重新請求佈局
+        }
+
         binding.wheelview.draw_wheel(14)
+        binding.button.setOnClickListener{
+            binding.wheelview.wheel()
+        }
     }
 }

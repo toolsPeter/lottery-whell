@@ -1,5 +1,6 @@
 package com.example.lotterywheel.canvas
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -9,7 +10,9 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.contentValuesOf
 import androidx.core.graphics.red
+import java.util.Objects
 import java.util.jar.Attributes
+import kotlin.random.Random
 
 class wheel(context: Context,attrs:AttributeSet):View(context,attrs) {
     private lateinit var rectF:RectF
@@ -86,5 +89,12 @@ class wheel(context: Context,attrs:AttributeSet):View(context,attrs) {
     fun draw_wheel(count:Int){
         counts = count
         invalidate()
+    }
+    fun wheel(duration: Long = 8000){
+        var temp = Random.nextInt(0,360).toFloat()
+        val animator = ObjectAnimator.ofFloat(this,"rotation",0f,7200f+temp)
+        animator.duration = duration
+//        animator.repeatCount = ObjectAnimator.INFINITE // 可以設置為無限次重複
+        animator.start()
     }
 }
